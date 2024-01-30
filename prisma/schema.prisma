@@ -6,7 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  // provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -24,4 +25,11 @@ model Post {
   content   String?
   authorId  Int
   author    User @relation(fields: [authorId], references: [id]) // "1 post solo tiene 1 autor"
+}
+
+model Product {
+  id      Int @id @default(autoincrement())
+  name    String
+  price   Decimal
+  stock   Boolean @default(false)
 }
